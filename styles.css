@@ -5,6 +5,15 @@
     box-sizing: border-box;
 }
 
+/* 強制淺色模式設定 */
+:root {
+    color-scheme: light only;
+}
+
+html {
+    color-scheme: light;
+}
+
 /* 螢幕閱讀器專用樣式 */
 .sr-only {
     position: absolute;
@@ -1073,50 +1082,8 @@ footer {
     }
 }
 
-/* 深色模式支援 */
-@media (prefers-color-scheme: dark) {
-    body {
-        background: linear-gradient(135deg, #0d47a1 0%, #1a237e 30%, #4a148c 60%, #263238 100%);
-        color: #f5f5f5;
-    }
-    
-    .hero-section {
-        background: linear-gradient(45deg, rgba(13,71,161,0.8) 0%, rgba(26,35,126,0.8) 50%, rgba(74,20,140,0.8) 100%);
-    }
-    
-    .detail-card,
-    .transport-section,
-    .parking-section,
-    .schedule-section {
-        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(144,202,249,0.1) 50%, rgba(186,104,200,0.1) 100%);
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .timeline-content {
-        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(144,202,249,0.1) 100%);
-        color: #f5f5f5;
-        backdrop-filter: blur(12px);
-    }
-    
-    .transport-item,
-    .parking-item {
-        background: linear-gradient(45deg, rgba(144,202,249,0.2) 0%, rgba(186,104,200,0.2) 50%, rgba(129,199,132,0.2) 100%);
-        backdrop-filter: blur(8px);
-    }
-    
-    .cta-section {
-        background: linear-gradient(45deg, rgba(186,104,200,0.6) 0%, rgba(144,202,249,0.6) 50%, rgba(129,199,132,0.6) 100%);
-    }
-    
-    .section-title {
-        color: #f5f5f5;
-    }
-    
-    footer {
-        background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(26,35,126,0.6) 100%);
-    }
-}
+/* 強制淺色模式 - 移除深色模式支援 */
+/* 原深色模式樣式已移除，網站將始終顯示為淺色模式 */
 
 /* 觸控設備專用樣式 */
 @media (pointer: coarse) {
