@@ -413,6 +413,44 @@ body {
     color: #ff9800;
 }
 
+/* 停車場連結樣式 */
+.parking-link {
+    color: #2196f3;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background: linear-gradient(45deg, rgba(33,150,243,0.1), rgba(233,30,99,0.1));
+    border: 1px solid rgba(33,150,243,0.2);
+}
+
+.parking-link:hover {
+    color: #1976d2;
+    background: linear-gradient(45deg, rgba(33,150,243,0.2), rgba(233,30,99,0.2));
+    border-color: rgba(33,150,243,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33,150,243,0.3);
+}
+
+.parking-link:focus {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px;
+    background: linear-gradient(45deg, rgba(33,150,243,0.2), rgba(233,30,99,0.2));
+}
+
+.parking-link .fa-external-link-alt {
+    font-size: 0.8em;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.parking-link:hover .fa-external-link-alt {
+    color: #1976d2;
+}
+
 /* 活動流程時間軸 */
 .schedule-section {
     background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(232,245,232,0.85) 100%);
@@ -907,6 +945,18 @@ footer {
         font-size: 1.5rem;
     }
     
+    /* 手機版停車場連結調整 */
+    .parking-link {
+        padding: 8px 12px;
+        font-size: 0.95rem;
+        gap: 6px;
+        border-radius: 12px;
+    }
+    
+    .parking-link:hover {
+        transform: none; /* 移動設備移除上移效果 */
+    }
+    
     /* CTA區域 */
     .cta-content h3 {
         font-size: 1.8rem;
@@ -1111,6 +1161,18 @@ footer {
     .parking-item:active {
         transform: scale(0.98);
         transition: transform 0.1s ease;
+    }
+    
+    /* 觸控設備停車場連結優化 */
+    .parking-link {
+        min-height: 44px;
+        min-width: 44px;
+        -webkit-tap-highlight-color: rgba(33,150,243,0.3);
+    }
+    
+    .parking-link:active {
+        background: linear-gradient(45deg, rgba(33,150,243,0.3), rgba(233,30,99,0.3));
+        transform: scale(0.98);
     }
 }
 
