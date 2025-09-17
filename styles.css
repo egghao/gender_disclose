@@ -1,0 +1,1218 @@
+/* 基本重置和字體設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 螢幕閱讀器專用樣式 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* 當焦點在sr-only元素上時顯示 */
+.sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    background: #000;
+    color: #fff;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #e1f5fe 0%, #f3e5f5 30%, #e8f5e8 60%, #fff3e0 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    /* 防止移動端縮放 */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    /* 優化觸控滾動 */
+    -webkit-overflow-scrolling: touch;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    /* 防止內容溢出 */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* 主標題區域 */
+.hero-section {
+    position: relative;
+    text-align: center;
+    padding: 60px 0;
+    background: linear-gradient(45deg, #b3e5fc 0%, #e1bee7 50%, #c8e6c8 100%);
+    border-radius: 0 0 50px 50px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.balloons {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    z-index: 1;
+}
+
+.balloon {
+    width: 40px;
+    height: 50px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: #666;
+    transform: translateX(-50%);
+}
+
+.balloon.blue {
+    background: linear-gradient(45deg, #2196f3, #64b5f6);
+    animation-delay: 0s;
+}
+
+.balloon.pink {
+    background: linear-gradient(45deg, #e91e63, #f48fb1);
+    animation-delay: 1s;
+}
+
+.balloon:nth-child(3) {
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.boy-text {
+    color: #2196f3;
+    display: inline-block;
+    animation: bounce 2s infinite;
+}
+
+.or-text {
+    color: #666;
+    font-size: 2rem;
+    margin: 0 20px;
+}
+
+.girl-text {
+    color: #e91e63;
+    display: inline-block;
+    animation: bounce 2s infinite 1s;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+.footprints {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.footprint {
+    width: 30px;
+    height: 40px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+}
+
+.footprint.blue {
+    background: #2196f3;
+}
+
+.footprint.pink {
+    background: #e91e63;
+}
+
+.footprint::before,
+.footprint::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: inherit;
+}
+
+.footprint::before {
+    top: -5px;
+    left: 5px;
+}
+
+.footprint::after {
+    top: -3px;
+    right: 5px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 10px 0;
+}
+
+.event-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 20px 0;
+}
+
+.confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ff6b6b;
+    animation: confetti-fall 3s linear infinite;
+}
+
+.confetti-piece:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+    background: #4ecdc4;
+}
+
+.confetti-piece:nth-child(2) {
+    left: 30%;
+    animation-delay: 0.5s;
+    background: #45b7d1;
+}
+
+.confetti-piece:nth-child(3) {
+    left: 50%;
+    animation-delay: 1s;
+    background: #f9ca24;
+}
+
+.confetti-piece:nth-child(4) {
+    left: 70%;
+    animation-delay: 1.5s;
+    background: #f0932b;
+}
+
+.confetti-piece:nth-child(5) {
+    left: 90%;
+    animation-delay: 2s;
+    background: #eb4d4b;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* 活動詳情卡片 */
+.event-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.detail-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,248,255,0.9) 100%);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.detail-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 3rem;
+    color: #2196f3;
+    margin-bottom: 20px;
+}
+
+.detail-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.detail-card p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 5px 0;
+}
+
+/* 區段標題 */
+.section-title {
+    font-size: 2rem;
+    color: #333;
+    margin: 40px 0 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.section-title i {
+    color: #2196f3;
+}
+
+/* 交通資訊 */
+.transport-section {
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(227,242,253,0.85) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 40px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.transport-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.transport-item {
+    background: linear-gradient(45deg, rgba(227,242,253,0.8) 0%, rgba(243,229,245,0.8) 50%, rgba(232,245,232,0.8) 100%);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.transport-item:hover {
+    transform: scale(1.05);
+}
+
+.station-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2196f3;
+    margin-bottom: 10px;
+}
+
+.station-info {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* 停車資訊 */
+.parking-section {
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(243,229,245,0.85) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 40px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.parking-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.parking-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: linear-gradient(45deg, rgba(255,243,224,0.8) 0%, rgba(252,228,236,0.8) 50%, rgba(232,245,232,0.8) 100%);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.parking-item:hover {
+    transform: translateX(10px);
+}
+
+.parking-item i {
+    font-size: 2rem;
+    color: #ff9800;
+}
+
+/* 活動流程時間軸 */
+.schedule-section {
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(232,245,232,0.85) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 40px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.timeline {
+    position: relative;
+    margin: 30px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #2196f3, #e91e63);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    display: flex;
+    margin: 30px 0;
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+    justify-content: flex-end;
+}
+
+.timeline-item:nth-child(even) {
+    justify-content: flex-start;
+}
+
+.timeline-time {
+    background: #2196f3;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.timeline-content {
+    background: linear-gradient(135deg, rgba(248,249,250,0.9) 0%, rgba(240,248,255,0.9) 100%);
+    padding: 20px;
+    border-radius: 15px;
+    width: 45%;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-top: 50px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right: 55%;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: 55%;
+}
+
+.timeline-content i {
+    font-size: 1.5rem;
+    color: #2196f3;
+    margin-top: 5px;
+}
+
+.timeline-content strong {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.timeline-content p {
+    color: #666;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+.timeline-item.highlight .timeline-time {
+    background: #ff9800;
+    animation: pulse 2s infinite;
+}
+
+.timeline-item.exciting .timeline-time {
+    background: #e91e63;
+    animation: pulse 2s infinite 0.5s;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
+}
+
+/* 期待見到你區域 */
+.cta-section {
+    text-align: center;
+    padding: 60px 0;
+    background: linear-gradient(45deg, rgba(248,187,217,0.8) 0%, rgba(187,222,251,0.8) 50%, rgba(200,230,200,0.8) 100%);
+    border-radius: 30px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.cta-content h3 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.cta-content p {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.heart-animation {
+    font-size: 3rem;
+    color: #e91e63;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+/* 頁腳 */
+footer {
+    text-align: center;
+    padding: 40px 0;
+    background: #333;
+    color: white;
+    border-radius: 30px 30px 0 0;
+    margin-top: 40px;
+}
+
+.footer-decorations {
+    margin-top: 15px;
+    font-size: 1.5rem;
+}
+
+.footer-decorations span {
+    margin: 0 10px;
+    animation: bounce 2s infinite;
+}
+
+.footer-decorations span:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.footer-decorations span:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.footer-decorations span:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+/* 響應式設計 */
+
+/* 大螢幕優化 (1200px+) */
+@media (min-width: 1201px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .hero-section {
+        padding: 80px 0;
+    }
+    
+    .main-title {
+        font-size: 4rem;
+    }
+    
+    .event-title {
+        font-size: 3rem;
+    }
+}
+
+/* 標準桌面 (992px - 1200px) */
+@media (max-width: 1200px) and (min-width: 993px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+    .detail-card, .transport-section, .parking-section, .schedule-section {
+        padding: 35px;
+    }
+}
+
+/* 平板橫向 (768px - 992px) */
+@media (max-width: 992px) and (min-width: 769px) {
+    .main-title {
+        font-size: 3rem;
+    }
+    
+    .event-title {
+        font-size: 2.2rem;
+    }
+    
+    .detail-card, .transport-section, .parking-section, .schedule-section {
+        padding: 30px;
+    }
+    
+    .timeline-content {
+        width: 42%;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content {
+        margin-right: 58%;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 58%;
+    }
+}
+
+/* 平板直向和小平板 (768px以下) */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    .event-title {
+        font-size: 2rem;
+        line-height: 1.3;
+    }
+    
+    .or-text {
+        font-size: 1.5rem;
+        margin: 0 10px;
+    }
+    
+    .hero-section {
+        padding: 50px 0;
+        margin-bottom: 30px;
+    }
+    
+    /* 時間軸響應式調整 */
+    .timeline::before {
+        left: 30px;
+        width: 3px;
+    }
+    
+    .timeline-item {
+        justify-content: flex-start !important;
+        margin: 25px 0;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 80px);
+        margin-left: 60px !important;
+        margin-right: 0 !important;
+        padding: 18px;
+    }
+    
+    .timeline-time {
+        left: 30px;
+        transform: translateX(-50%);
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* 網格佈局調整 */
+    .transport-options {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .event-details {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    /* 裝飾元素調整 */
+    .balloons {
+        display: none;
+    }
+    
+    .confetti-piece {
+        width: 8px;
+        height: 8px;
+    }
+    
+    /* 容器和間距調整 */
+    .container {
+        padding: 0 15px;
+    }
+    
+    .detail-card, .transport-section, .parking-section, .schedule-section {
+        padding: 25px;
+        margin: 30px 0;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin: 30px 0 20px;
+    }
+    
+    .cta-section {
+        padding: 50px 0;
+        margin: 30px 0;
+    }
+    
+    .cta-content h3 {
+        font-size: 2rem;
+    }
+    
+    .cta-content p {
+        font-size: 1.1rem;
+    }
+    
+    /* 卡片和元素間距優化 */
+    .card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .parking-item, .transport-item {
+        padding: 18px;
+    }
+}
+
+/* 手機直向 (480px以下) */
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2rem;
+        line-height: 1.1;
+        margin: 15px 0;
+    }
+    
+    .event-title {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin: 15px 0;
+    }
+    
+    .or-text {
+        font-size: 1.2rem;
+        margin: 0 8px;
+    }
+    
+    .hero-section {
+        padding: 40px 0;
+        border-radius: 0 0 30px 30px;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    /* 容器和卡片調整 */
+    .container {
+        padding: 0 10px;
+    }
+    
+    .detail-card,
+    .transport-section,
+    .parking-section,
+    .schedule-section {
+        padding: 20px;
+        margin: 25px 0;
+        border-radius: 15px;
+    }
+    
+    .cta-section {
+        padding: 40px 0;
+        margin: 25px 0;
+        border-radius: 20px;
+    }
+    
+    /* 時間軸手機優化 */
+    .timeline-content {
+        padding: 15px;
+        font-size: 0.9rem;
+        width: calc(100% - 70px);
+        margin-left: 50px !important;
+    }
+    
+    .timeline-time {
+        left: 25px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        border-radius: 15px;
+    }
+    
+    .timeline::before {
+        left: 25px;
+        width: 2px;
+    }
+    
+    .timeline-content i {
+        font-size: 1.2rem;
+    }
+    
+    .timeline-content strong {
+        font-size: 1rem;
+    }
+    
+    .timeline-content p {
+        font-size: 0.85rem;
+        margin-top: 3px;
+    }
+    
+    /* 裝飾元素調整 */
+    .footprints {
+        gap: 15px;
+        margin: 15px 0;
+    }
+    
+    .footprint {
+        width: 20px;
+        height: 30px;
+    }
+    
+    .confetti-piece {
+        width: 6px;
+        height: 6px;
+    }
+    
+    /* 區段標題 */
+    .section-title {
+        font-size: 1.3rem;
+        margin: 25px 0 15px;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .section-title i {
+        font-size: 1.5rem;
+    }
+    
+    /* 卡片內容調整 */
+    .card-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+    
+    .detail-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+    
+    .detail-card p {
+        font-size: 1rem;
+    }
+    
+    /* 交通和停車資訊 */
+    .transport-item {
+        padding: 15px;
+        border-radius: 12px;
+    }
+    
+    .station-name {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+    
+    .station-info {
+        font-size: 0.9rem;
+    }
+    
+    .parking-item {
+        padding: 15px;
+        gap: 12px;
+        border-radius: 12px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .parking-item i {
+        font-size: 1.5rem;
+    }
+    
+    /* CTA區域 */
+    .cta-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .cta-content p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+    .heart-animation {
+        font-size: 2.5rem;
+    }
+    
+    /* 頁腳 */
+    footer {
+        padding: 30px 0;
+        border-radius: 20px 20px 0 0;
+        margin-top: 30px;
+    }
+    
+    .footer-decorations {
+        margin-top: 12px;
+        font-size: 1.2rem;
+    }
+    
+    .footer-decorations span {
+        margin: 0 8px;
+    }
+}
+
+/* 超小螢幕優化 (360px以下) */
+@media (max-width: 360px) {
+    .main-title {
+        font-size: 1.8rem;
+    }
+    
+    .event-title {
+        font-size: 1.3rem;
+    }
+    
+    .or-text {
+        font-size: 1rem;
+        margin: 0 5px;
+    }
+    
+    .container {
+        padding: 0 8px;
+    }
+    
+    .detail-card,
+    .transport-section,
+    .parking-section,
+    .schedule-section,
+    .cta-section {
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    .timeline-content {
+        padding: 12px;
+        width: calc(100% - 60px);
+        margin-left: 40px !important;
+    }
+    
+    .timeline-time {
+        left: 20px;
+        padding: 5px 8px;
+        font-size: 0.75rem;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+        margin: 20px 0 12px;
+    }
+    
+    .footprints {
+        gap: 10px;
+    }
+    
+    .footprint {
+        width: 18px;
+        height: 25px;
+    }
+}
+
+/* 橫向模式優化 */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        padding: 30px 0;
+    }
+    
+    .main-title {
+        font-size: 2.2rem;
+        margin: 10px 0;
+    }
+    
+    .event-title {
+        font-size: 1.8rem;
+        margin: 10px 0;
+    }
+    
+    .detail-card,
+    .transport-section,
+    .parking-section,
+    .schedule-section {
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .timeline-content {
+        padding: 12px;
+    }
+}
+
+/* 高解析度螢幕優化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .time-unit,
+    .timeline-time,
+    .detail-card,
+    .transport-item,
+    .parking-item {
+        border: 0.5px solid rgba(255,255,255,0.1);
+    }
+    
+    .confetti-piece,
+    .balloon {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+}
+
+/* 無障礙和輔助功能優化 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .confetti-piece {
+        display: none;
+    }
+    
+    .balloon {
+        animation: none;
+    }
+}
+
+/* 高對比度模式支援 */
+@media (prefers-contrast: high) {
+    .detail-card,
+    .transport-section,
+    .parking-section,
+    .schedule-section {
+        border: 2px solid #000;
+        background: #fff;
+    }
+    
+    .time-unit,
+    .timeline-time {
+        border: 2px solid #fff;
+    }
+    
+    .main-title,
+    .event-title {
+        text-shadow: 2px 2px 0px #000;
+    }
+}
+
+/* 深色模式支援 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #0d47a1 0%, #1a237e 30%, #4a148c 60%, #263238 100%);
+        color: #f5f5f5;
+    }
+    
+    .hero-section {
+        background: linear-gradient(45deg, rgba(13,71,161,0.8) 0%, rgba(26,35,126,0.8) 50%, rgba(74,20,140,0.8) 100%);
+    }
+    
+    .detail-card,
+    .transport-section,
+    .parking-section,
+    .schedule-section {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(144,202,249,0.1) 50%, rgba(186,104,200,0.1) 100%);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .timeline-content {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(144,202,249,0.1) 100%);
+        color: #f5f5f5;
+        backdrop-filter: blur(12px);
+    }
+    
+    .transport-item,
+    .parking-item {
+        background: linear-gradient(45deg, rgba(144,202,249,0.2) 0%, rgba(186,104,200,0.2) 50%, rgba(129,199,132,0.2) 100%);
+        backdrop-filter: blur(8px);
+    }
+    
+    .cta-section {
+        background: linear-gradient(45deg, rgba(186,104,200,0.6) 0%, rgba(144,202,249,0.6) 50%, rgba(129,199,132,0.6) 100%);
+    }
+    
+    .section-title {
+        color: #f5f5f5;
+    }
+    
+    footer {
+        background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(26,35,126,0.6) 100%);
+    }
+}
+
+/* 觸控設備專用樣式 */
+@media (pointer: coarse) {
+    /* 增大可點擊區域 */
+    .balloon,
+    .time-unit,
+    .detail-card,
+    .transport-item,
+    .parking-item {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* 移除hover效果，避免觸控設備的問題 */
+    .detail-card:hover,
+    .transport-item:hover,
+    .parking-item:hover,
+    .timeline-content:hover {
+        transform: none !important;
+    }
+    
+    /* 添加活動反饋 */
+    .detail-card:active,
+    .transport-item:active,
+    .parking-item:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* 印刷樣式 */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .balloon,
+    .confetti,
+    .confetti-piece {
+        display: none !important;
+    }
+    
+    .hero-section {
+        background: white !important;
+        border: 2px solid #000;
+    }
+    
+    .detail-card,
+    .transport-section,
+    .parking-section,
+    .schedule-section {
+        background: white !important;
+        border: 1px solid #000;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+    
+    .timeline-content {
+        background: white !important;
+        border: 1px solid #000;
+    }
+    
+    .time-unit,
+    .timeline-time {
+        background: #f0f0f0 !important;
+        color: black !important;
+    }
+    
+    /* 確保重要資訊在新頁面開始 */
+    .schedule-section {
+        page-break-before: auto;
+    }
+}
+
+/* iOS Safari 特定優化 */
+@supports (-webkit-touch-callout: none) {
+    .hero-section,
+    .detail-card,
+    .transport-section,
+    .parking-section,
+    .schedule-section,
+    .cta-section {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    /* 修復iOS Safari的100vh問題 */
+    body {
+        min-height: -webkit-fill-available;
+    }
+    
+    /* 防止iOS橡皮筋效果 */
+    .container {
+        -webkit-overflow-scrolling: touch;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+} 
