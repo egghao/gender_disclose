@@ -1,210 +1,100 @@
 // 頁面加載完成後執行
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. 倒數計時器功能
-    function setupCountdown() {
-        // 設定活動日期時間 (2024年9月28日下午2點)
-        const eventDate = new Date('2024-09-28T14:00:00').getTime();
+    // 1. 活動時間卡片倒數計時器功能
+    function setupEventCountdown() {
+        // 設定活動日期時間 (2025年9月28日下午2點)
+        const eventDate = new Date('2025-09-28T14:00:00').getTime();
         
-        function updateCountdown() {
+        function updateEventCountdown() {
+            // 獲取當前時間（使用者本地時間）
             const now = new Date().getTime();
             const timeLeft = eventDate - now;
             
+            // 獲取倒數計時器元素
+            const daysElement = document.getElementById('days');
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+            const countdownTimer = document.querySelector('.countdown-timer');
+            const eventStatus = document.getElementById('event-status');
+            
+            // 檢查倒數計時器元素是否存在
+            if (!daysElement || !hoursElement || !minutesElement || !secondsElement) {
+                console.warn('倒數計時器元素未找到');
+                return;
+            }
+            
             if (timeLeft > 0) {
+                // 計算剩餘時間
                 const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
                 
-                // 創建倒數計時器顯示
-                if (!document.getElementById('countdown')) {
-                    const countdownElement = document.createElement('div');
-                    countdownElement.id = 'countdown';
-                    countdownElement.innerHTML = `
-                        <div class="countdown-container">
-                            <h4>距離活動開始還有</h4>
-                            <div class="countdown-display">
-                                <div class="time-unit">
-                                    <span class="time-number">${days}</span>
-                                    <span class="time-label">天</span>
-                                </div>
-                                <div class="time-unit">
-                                    <span class="time-number">${hours}</span>
-                                    <span class="time-label">時</span>
-                                </div>
-                                <div class="time-unit">
-                                    <span class="time-number">${minutes}</span>
-                                    <span class="time-label">分</span>
-                                </div>
-                                <div class="time-unit">
-                                    <span class="time-number">${seconds}</span>
-                                    <span class="time-label">秒</span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    // 插入到主標題後面
-                    const heroSection = document.querySelector('.hero-section');
-                    heroSection.appendChild(countdownElement);
-                    
-                    // 添加倒數計時器的響應式CSS樣式
-                    const style = document.createElement('style');
-                    style.textContent = `
-                        #countdown {
-                            background: rgba(255, 255, 255, 0.9);
-                            padding: 20px;
-                            border-radius: 15px;
-                            margin-top: 30px;
-                            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-                            backdrop-filter: blur(10px);
-                        }
-                        
-                        .countdown-container h4 {
-                            color: #333;
-                            margin-bottom: 15px;
-                            font-size: 1.2rem;
-                        }
-                        
-                        .countdown-display {
-                            display: flex;
-                            justify-content: center;
-                            gap: 20px;
-                            flex-wrap: wrap;
-                        }
-                        
-                        .time-unit {
-                            text-align: center;
-                            background: linear-gradient(45deg, #2196f3, #e91e63);
-                            color: white;
-                            padding: 15px;
-                            border-radius: 10px;
-                            min-width: 60px;
-                            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-                            transition: transform 0.3s ease;
-                        }
-                        
-                        .time-unit:hover {
-                            transform: scale(1.1);
-                        }
-                        
-                        .time-number {
-                            display: block;
-                            font-size: 1.5rem;
-                            font-weight: 700;
-                        }
-                        
-                        .time-label {
-                            font-size: 0.9rem;
-                        }
-                        
-                        /* 平板響應式設計 */
-                        @media (max-width: 768px) {
-                            #countdown {
-                                padding: 15px;
-                                margin: 20px 10px;
-                            }
-                            
-                            .countdown-container h4 {
-                                font-size: 1.1rem;
-                            }
-                            
-                            .countdown-display {
-                                gap: 15px;
-                            }
-                            
-                            .time-unit {
-                                padding: 12px;
-                                min-width: 55px;
-                            }
-                            
-                            .time-number {
-                                font-size: 1.3rem;
-                            }
-                        }
-                        
-                        /* 手機響應式設計 */
-                        @media (max-width: 480px) {
-                            #countdown {
-                                padding: 12px;
-                                margin: 15px 5px;
-                            }
-                            
-                            .countdown-container h4 {
-                                font-size: 1rem;
-                                margin-bottom: 10px;
-                            }
-                            
-                            .countdown-display {
-                                gap: 10px;
-                            }
-                            
-                            .time-unit {
-                                padding: 10px 8px;
-                                min-width: 50px;
-                            }
-                            
-                            .time-number {
-                                font-size: 1.2rem;
-                            }
-                            
-                            .time-label {
-                                font-size: 0.8rem;
-                            }
-                        }
-                        
-                        /* 超小螢幕優化 */
-                        @media (max-width: 320px) {
-                            .countdown-display {
-                                gap: 8px;
-                            }
-                            
-                            .time-unit {
-                                padding: 8px 6px;
-                                min-width: 45px;
-                            }
-                            
-                            .time-number {
-                                font-size: 1.1rem;
-                            }
-                        }
-                    `;
-                    document.head.appendChild(style);
-                } else {
-                    // 更新現有的倒數計時器
-                    document.querySelector('#countdown .countdown-display').innerHTML = `
-                        <div class="time-unit">
-                            <span class="time-number">${days}</span>
-                            <span class="time-label">天</span>
-                        </div>
-                        <div class="time-unit">
-                            <span class="time-number">${hours}</span>
-                            <span class="time-label">時</span>
-                        </div>
-                        <div class="time-unit">
-                            <span class="time-number">${minutes}</span>
-                            <span class="time-label">分</span>
-                        </div>
-                        <div class="time-unit">
-                            <span class="time-number">${seconds}</span>
-                            <span class="time-label">秒</span>
-                        </div>
-                    `;
+                // 更新倒數計時器顯示，當天數大於99時顯示實際天數
+                daysElement.textContent = days > 99 ? String(days) : String(days).padStart(2, '0');
+                hoursElement.textContent = String(hours).padStart(2, '0');
+                minutesElement.textContent = String(minutes).padStart(2, '0');
+                secondsElement.textContent = String(seconds).padStart(2, '0');
+                
+                // 確保倒數計時器顯示，隱藏活動狀態
+                if (countdownTimer) countdownTimer.style.display = 'flex';
+                if (eventStatus) eventStatus.style.display = 'none';
+                
+                // 重置所有時間方塊的樣式（清除之前的動畫效果）
+                const timeBlocks = document.querySelectorAll('.time-block');
+                timeBlocks.forEach(block => {
+                    block.style.animation = '';
+                    block.style.background = '';
+                });
+                
+                // 當剩餘時間少於24小時時，添加注意動畫效果
+                if (timeLeft < 86400000) { // 小於24小時
+                    timeBlocks.forEach(block => {
+                        block.style.animation = 'pulse 2s infinite';
+                    });
                 }
+                
+                // 當剩餘時間少於1小時時，添加緊急動畫效果
+                if (timeLeft < 3600000) { // 小於1小時
+                    timeBlocks.forEach(block => {
+                        block.style.animation = 'pulse 1s infinite';
+                        block.style.background = 'linear-gradient(45deg, #ff9800, #ff5722)';
+                    });
+                }
+                
+                // 當剩餘時間少於10分鐘時，添加更強烈的動畫效果
+                if (timeLeft < 600000) { // 小於10分鐘
+                    timeBlocks.forEach(block => {
+                        block.style.animation = 'urgent-pulse 0.5s infinite';
+                        block.style.background = 'linear-gradient(45deg, #ff5722, #f44336)';
+                    });
+                }
+                
             } else {
-                // 活動已開始
-                if (document.getElementById('countdown')) {
-                    document.getElementById('countdown').innerHTML = `
-                        <div class="countdown-container">
-                            <h4 style="color: #e91e63; font-size: 1.5rem;">🎉 活動進行中！🎉</h4>
-                        </div>
-                    `;
+                // 活動時間已到或已過，顯示活動狀態
+                if (countdownTimer) countdownTimer.style.display = 'none';
+                if (eventStatus) {
+                    eventStatus.style.display = 'block';
+                    eventStatus.style.animation = 'celebration 2s infinite';
                 }
+                
+                // 在控制台記錄活動開始
+                console.log('🎉 小籠包性別揭曉派對時間到了！');
+            }
+            
+            // 在控制台顯示調試信息（開發時可用）
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log(`倒數計時 - 剩餘: ${Math.floor(timeLeft / (1000 * 60 * 60 * 24))}天 ${Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}時 ${Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60))}分 ${Math.floor((timeLeft % (1000 * 60)) / 1000)}秒`);
             }
         }
         
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        // 初始更新
+        updateEventCountdown();
+        
+        // 每秒更新一次
+        setInterval(updateEventCountdown, 1000);
     }
     
     // 2. 響應式導航和滾動效果
@@ -544,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // 初始化所有功能
-    setupCountdown();
+    setupEventCountdown();
     setupResponsiveNavigation();
     setupTouchOptimizations();
     setupScrollAnimations();
