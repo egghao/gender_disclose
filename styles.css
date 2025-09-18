@@ -457,8 +457,8 @@ body {
 }
 
 .parking-options {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
@@ -876,6 +876,11 @@ footer {
     
     /* 網格佈局調整 */
     .transport-options {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .parking-options {
         grid-template-columns: 1fr;
         gap: 15px;
     }

@@ -1,3 +1,4 @@
 *.bat
 *.md
 *.mp4
+.vercel
